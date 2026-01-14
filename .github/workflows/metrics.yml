@@ -1,0 +1,28 @@
+name: GitHub Metrics
+on:
+  schedule: [{cron: "0 0 * * *"}]
+  workflow_dispatch:
+
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Generate GitHub metrics
+        uses: lowlighter/metrics@latest
+        with:
+          # ⚠️ 修改这里为你的正确用户名！
+          user: ian161440  # 注意：不是 iam61440
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: ""
+          config_timezone: Asia/Shanghai
+          plugin_languages: yes
+          plugin_languages_details: bytes-size
+          plugin_languages_limit: 5
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: half-year
+          plugin_habits: yes
+          plugin_habits_from: 100
+          output_action: write
+          filename: github-metrics.svg
